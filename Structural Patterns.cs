@@ -29,6 +29,10 @@ Facade: Provide a unified interface to a set of interfaces in a subsystem. Faça
            && _loan.HasNoBadLoans(cust)
            && _credit.HasGoodCredit(cust);
     }
+
+    public bool HasSufficientSavings(Customer cust, int amount) => _bank.HasSufficientSavings(cust, amount);
+    public bool HasNoBadLoans(Customer cust) => _loan.HasNoBadLoans(cust);
+    public bool HasGoodCredit(Customer cust) => _credit.HasGoodCredit(cust);
   }
 
 Decorator: Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
