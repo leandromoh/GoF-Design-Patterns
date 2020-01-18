@@ -27,10 +27,10 @@ void Main()
     Animal person = new Person(crawl);
     person.Move(); // crawling
 
-    person.MoveLogic = walk;
+    person = new Person(walk);
     person.Move(); // walking
 
-    person.MoveLogic = swim;
+    person = new Person(swim);
     person.Move(); // swimming
 }
 
@@ -78,6 +78,23 @@ Decorator: Attach additional responsibilities to an object dynamically. Decorato
 
 
 Proxy: Provide a surrogate or placeholder for another object to control access to it.
+//https://www.dotnettricks.com/learn/designpatterns/proxy-design-pattern-dotnet
+
+public interface ISubject
+{
+  void PerformAction();
+}
+
+public class RealSubject : ISubject
+{
+  public void PerformAction() => Console.WriteLine("RealSubject action performed.");
+}
+
+public class Proxy : ISubject
+{
+ private RealSubject _realSubject;
+ public void PerformAction() => (_realSubject ??= new RealSubject()).PerformAction();
+}
 
 Composite: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
 //https://robsoncastilho.com.br/2013/07/10/design-patterns-usando-composite-para-montar-uma-estrutura-em-arvore/
@@ -118,3 +135,63 @@ void Main()
 	departamentY.Add(employeeC);
 	departamentX.CalculateCost(); // outputs 6
 }
+
+Flyweight: Use sharing to support large numbers of fine-grained objects efficiently.
+// https://www.dotnettricks.com/learn/designpatterns/flyweight-design-pattern-dotnet
+// https://www.dofactory.com/net/flyweight-design-pattern
+
+   static void Main()
+    {
+      // Arbitrary extrinsic state
+
+      int extrinsicstate = 22;
+ 
+      FlyweightFactory factory = new FlyweightFactory();
+ 
+      // Work with different flyweight instances
+
+      Flyweight fx = factory.GetFlyweight("X");
+      fx.Operation(--extrinsicstate);
+ 
+      Flyweight fy1 = factory.GetFlyweight("Y");
+      fy1.Operation(--extrinsicstate);
+
+      Flyweight fy2 = factory.GetFlyweight("Y");
+      fy2.Operation(--extrinsicstate);
+ 
+      Flyweight fu = new UnsharedConcreteFlyweight { Id = "A" };
+      fu.Operation(--extrinsicstate);
+    }
+
+  class FlyweightFactory
+  {
+    private Hashtable flyweights = new Hashtable();
+ 
+    public Flyweight GetFlyweight(string key)
+    {
+      if (flyweights.Contains(key))
+        return (Flyweight)flyweights[key];
+
+      var model = new ConcreteFlyweight { Id = key };
+      flyweights.Add(key, model);
+      return model;
+    } 
+  }
+ 
+  abstract class Flyweight
+  {
+    public string Id { get; set; }
+    public abstract void Operation(int extrinsicstate);
+  }
+ 
+  class ConcreteFlyweight : Flyweight
+  {
+    public override void Operation(int extrinsicstate) => 
+      Console.WriteLine($"ConcreteFlyweight: {Id} {extrinsicstate}");
+  }
+ 
+  class UnsharedConcreteFlyweight : Flyweight
+  {
+    public override void Operation(int extrinsicstate) => 
+      Console.WriteLine($"UnsharedConcreteFlyweight: {Id} {extrinsicstate}");
+  }
