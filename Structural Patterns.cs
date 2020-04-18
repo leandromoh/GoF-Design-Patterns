@@ -56,11 +56,13 @@ Facade: Provide a unified interface to a set of interfaces in a subsystem. Faça
 
 Decorator: Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
 
-    class UserRepositoryLogTimeDecorator : AbstractUserRepositoryDecoretor
+    class UserRepositoryLogTimeDecorator : IUserRepository
     {
-        public UserRepositoryLogTimeDecorator(IUserRepository repository) : base(repository) { }
+        private readonly IUserRepository _repository;
+
+        public UserRepositoryLogTimeDecorator(IUserRepository repository) => _repository = repository;
         
-        public override User GetById(int id)
+        public User GetById(int id)
         {
             logger.Write($"IUserRepository.GetById was called for id {id}, starting at {DateTime.Now}");
             var user = _repository.GetById(id);
