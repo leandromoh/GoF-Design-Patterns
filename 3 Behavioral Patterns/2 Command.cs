@@ -95,7 +95,7 @@ namespace ConsoleApp
         }
     }
 
-    public class Garcon // Invoker
+    public class Garcon // Invoker & Client
     {
         private List<Command> _commands { get; set; } = new List<Command>();
         private Comanda _comanda { get; set; } = new Comanda();
