@@ -79,7 +79,7 @@ namespace ConsoleApp
 
     public class Comanda // Receiver
     {
-        private Dictionary<string, int> Pedidos { get; set; } = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> Pedidos { get; set; } = new Dictionary<string, int>();
 
         public void Update(Operation operation, string product, int quantity)
         {
@@ -97,8 +97,8 @@ namespace ConsoleApp
 
     public class Garcon // Invoker & Client
     {
-        private List<Command> _commands { get; set; } = new List<Command>();
-        private Comanda _comanda { get; set; } = new Comanda();
+        private readonly List<Command> _commands { get; set; } = new List<Command>();
+        private readonly Comanda _comanda { get; set; } = new Comanda();
 
         public void Invoke(Operation operation, string product, int quantity)
         {
