@@ -1,4 +1,5 @@
-Composite: Compose objects into tree structures to represent part-whole hierarchies. Composite lets clients treat individual objects and compositions of objects uniformly.
+Composite: Compose objects into tree structures to represent part-whole hierarchies. 
+Composite lets clients treat individual objects and compositions of objects uniformly.
 //https://robsoncastilho.com.br/2013/07/10/design-patterns-usando-composite-para-montar-uma-estrutura-em-arvore/
 //https://www.dofactory.com/net/composite-design-pattern
 
