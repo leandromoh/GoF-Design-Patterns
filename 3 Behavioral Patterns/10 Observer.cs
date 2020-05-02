@@ -1,11 +1,8 @@
 Observer: Define a one-to-many dependency between objects so that when one object changes state, 
 all its dependents are notified and updated automatically.
 
-using System;
-using System.Collections.Generic;
+// .net interfaces System.IObserver<T> and System.IObservable<T>
 
-namespace DoFactory.GangOfFour.Observer.RealWorld
-{
     class MainApp
     {
         static void Main()
@@ -97,4 +94,3 @@ namespace DoFactory.GangOfFour.Observer.RealWorld
         public void Update(Stock stock) =>
           Console.WriteLine($"Notified {Name} of {stock.Symbol}'s change to {stock.Price:C}");
     }
-}
